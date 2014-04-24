@@ -1,0 +1,68 @@
+$brand-bg: #fff !default;
+$brand-logo: #eee !default;
+
+@import "wcc/layouts/components/push_footer.scss";
+
+body {
+  border-top: 4px solid $brand-primary;
+  padding-bottom: 20px;
+}
+
+header {
+  padding-top: 20px;
+  margin-bottom: 20px;
+  background-color: $brand-bg;
+
+  .content-wrapper {
+    @extend .clearfix;
+    border-bottom: 1px solid $brand-logo;
+  }
+
+  #logo {
+    float: left;
+    margin-right: 10px;
+    width: 40px;
+    height: 40px;
+
+    svg path {
+      fill: $brand-logo;
+    }
+  }
+
+  h3 {
+    float: left;
+    color: $gray-light;
+    padding-bottom: 19px;
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 40px;
+
+    .app-name {
+      color: $brand-primary;
+    }
+  }
+
+  .nav {
+    float: right;
+  }
+
+  @include breakpoint($screen-sm) {
+    text-align: center;
+
+    #logo {
+      display: inline-block;
+      margin-right: 0;
+    }
+
+    #logo, h3, .nav {
+      float: none;
+    }
+  }
+
+}
+
+footer {
+  color: #fff;
+  background-color: $brand-primary;
+}
+
