@@ -25,4 +25,5 @@ namespace :db do
     `#{command}`
   end
 
-end
+end if WCC::RakeHelpers.mysql?
+

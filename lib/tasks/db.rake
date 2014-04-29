@@ -2,7 +2,7 @@ module WCC
   module RakeHelpers
 
     def self.db_config
-      @config ||= YAML.load_file("config/database.yml")[ENV['RAILS_ENV'] || 'development']
+      @config ||= YAML.load_file("config/database.yml")[ENV['RAILS_ENV'] || 'development'] || {}
     end
 
     def self.db_cmd_with_password(cmd, pw)
@@ -27,11 +27,3 @@ namespace :db do
 
 end
 
-
-if WCC::RakeHelpers.postgresql?
-  load File.expand_path(File.join(__FILE__, "..", "db", "psql.rake"))
-end
-
-if WCC::RakeHelpers.mysql?
-  load File.expand_path(File.join(__FILE__, "..", "db", "mysql.rake"))
-end
