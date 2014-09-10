@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'wcc/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "wcc"
+  spec.name          = "wcc-base"
   spec.version       = WCC::VERSION
   spec.authors       = ["Travis Petticrew"]
   spec.email         = ["tpetticrew@watermark.org"]
