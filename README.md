@@ -10,7 +10,7 @@ separate gem. This should be a breeding ground for new gems.
 
 Add this line to your application's Gemfile:
 
-    gem 'wcc'
+    gem 'wcc-base'
 
 And then execute:
 
@@ -18,12 +18,11 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install wcc
+    $ gem install wcc-base
 
 ## Usage
 
-No specific usage instructions. Check out one of the apps to see
-example usages.
+No specific usage instructions at this time.
 
 ## Contributing
 
