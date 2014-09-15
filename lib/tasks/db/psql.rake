@@ -31,12 +31,18 @@ namespace :db do
   desc 'Restore the pg datbase from the specified file'
   task :restore, :file do |t, args|
     raise "file argument required" unless File.exists?(args[:file])
+    db_config = WCC::RakeHelpers.db_config
     command = [
       "cat #{args[:file]} | psql",
-      WCC::RakeHelpers.db_config['database'],
-    ].join(" ")
+      db_config['username'] ? "--username=#{db_config['username']}" : nil,
+      db_config['host'] ? "--host=#{db_config['host']}" : nil,
+      db_config['database'],
+    ].compact.join(" ")
     `#{command}`
+    Rake::Task['db:after_restore'].invoke(args[:file])
   end
+
+  task :after_restore, :file
 
 end if WCC::RakeHelpers.postgresql?
 
