@@ -33,7 +33,8 @@ namespace :db do
     raise "file argument required" unless File.exists?(args[:file])
     db_config = WCC::RakeHelpers.db_config
     command = [
-      "cat #{args[:file]} | psql",
+      "cat #{args[:file]} |",
+      WCC::RakeHelpers.db_cmd_with_password_string(["psql"], db_config['password']),
       db_config['username'] ? "--username=#{db_config['username']}" : nil,
       db_config['host'] ? "--host=#{db_config['host']}" : nil,
       db_config['database'],

@@ -6,7 +6,11 @@ module WCC
     end
 
     def self.db_cmd_with_password(cmd, pw)
-      `PGPASSWORD="#{pw}" #{cmd.join(" ")}`
+      `#{db_cmd_with_password_string(cmd, pw)}`
+    end
+
+    def self.db_cmd_with_password_string(cmd, pw)
+      %{PGPASSWORD="#{pw}" #{cmd.join(" ")}}
     end
 
     def self.postgresql?
