@@ -2,7 +2,7 @@ module WCC
   module RakeHelpers
 
     def self.db_config
-      @config ||= YAML.load_file("config/database.yml")[ENV['RAILS_ENV'] || 'development'] || {}
+      @config ||= db_config_file_data[ENV['RAILS_ENV'] || 'development'] || {}
     end
 
     def self.db_cmd_with_password(cmd, pw)
@@ -19,6 +19,12 @@ module WCC
 
     def self.mysql?
       db_config["adapter"] == "mysql"
+    end
+
+    def self.db_config_file_data
+      YAML.load_file("config/database.yml")
+    rescue SystemCallError
+      {}
     end
 
   end
