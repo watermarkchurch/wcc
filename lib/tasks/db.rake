@@ -22,7 +22,11 @@ module WCC
     end
 
     def self.db_config_file_data
-      YAML.load_file("config/database.yml")
+      if defined?(ActiveRecord::Base)
+        ActiveRecord::Base.configurations
+      else
+        YAML.load_file("config/database.yml")
+      end
     rescue SystemCallError
       {}
     end
