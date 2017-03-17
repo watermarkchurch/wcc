@@ -2,7 +2,7 @@ module WCC
   module RakeHelpers
 
     def self.db_config
-      @config ||= db_config_file_data[ENV['RAILS_ENV'] || 'development'] || {}
+      db_config_file_data[ENV['RAILS_ENV'] || 'development'] || {}
     end
 
     def self.db_cmd_with_password(cmd, pw)
@@ -25,7 +25,7 @@ module WCC
       if defined?(ActiveRecord::Base) && ActiveRecord::Base.configurations.present?
         ActiveRecord::Base.configurations
       else
-        YAML.load_file("config/database.yml")
+        @yaml_file ||= YAML.load_file("config/database.yml")
       end
     rescue SystemCallError
       {}
