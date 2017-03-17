@@ -22,7 +22,7 @@ module WCC
     end
 
     def self.db_config_file_data
-      if defined?(ActiveRecord::Base)
+      if defined?(ActiveRecord::Base) && ActiveRecord::Base.configurations.present?
         ActiveRecord::Base.configurations
       else
         YAML.load_file("config/database.yml")
