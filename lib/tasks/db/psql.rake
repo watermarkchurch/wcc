@@ -15,7 +15,7 @@ namespace :db do
   Rake::Task['db:drop'].enhance ['db:drop_pg_connections']
 
   desc 'Dump the pg database to the specified file'
-  task :dump, :file do |t, args|
+  task :dump, [:file] => :environment do |t, args|
     raise "file argument required" unless args[:file]
     db_config = WCC::RakeHelpers.db_config
     command = [
@@ -29,7 +29,7 @@ namespace :db do
   end
 
   desc 'Restore the pg datbase from the specified file'
-  task :restore, :file do |t, args|
+  task :restore, [:file] => :environment do |t, args|
     raise "file argument required" unless File.exists?(args[:file])
     db_config = WCC::RakeHelpers.db_config
     case File.extname(args[:file])
