@@ -25,7 +25,9 @@ module WCC
       if defined?(ActiveRecord::Base) && ActiveRecord::Base.configurations.present?
         ActiveRecord::Base.configurations
       else
-        @yaml_file ||= YAML.load_file("config/database.yml")
+        @yaml_file ||= YAML.load(
+          ERB.new(File.read("#{app_dir}/config/database.yml" )).result
+        )
       end
     rescue SystemCallError
       {}
