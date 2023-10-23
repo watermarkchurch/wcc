@@ -2,7 +2,12 @@ module WCC
   module RakeHelpers
 
     def self.db_config
-      db_config_file_data[ENV['RAILS_ENV'] || 'development'] || {}
+      if Rails::VERSION::MAJOR >= 7
+        configs = db_config_file_data.configs_for(env_name: ENV['RAILS_ENV'] || 'development')
+        configs.any? ? configs[0].configuration_hash : {}
+      else
+        db_config_file_data[ENV['RAILS_ENV'] || 'development'] || {}
+      end
     end
 
     def self.db_cmd_with_password(cmd, pw)
