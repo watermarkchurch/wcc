@@ -2,7 +2,7 @@ module WCC
   module RakeHelpers
 
     def self.db_config
-      if Rails::VERSION::MAJOR == 7
+      if Rails::VERSION::MAJOR >= 7
         configs = db_config_file_data.configs_for(env_name: ENV['RAILS_ENV'] || 'development')
         configs.any? ? configs[0].configuration_hash : {}
       else
